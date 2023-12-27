@@ -7,7 +7,7 @@ public static class Day2
     public static int Execute()
     {
         var input = File.ReadAllLines("Day2/Day2Input.txt");
-        return GetPossibleGames(input);
+        return GetSumOfValidGameNumbers(input);
     }
 
     private static bool IsInvalidGame(string gameString)
@@ -27,7 +27,7 @@ public static class Day2
         return containsInvalidGameSets;
     }
 
-    private static int GetPossibleGames(string[] games)
+    private static int GetSumOfValidGameNumbers(string[] games)
     {
         return games.Where(s => !IsInvalidGame(s))
             .Sum(x => int.Parse(new Regex(@"(\d+)(?=:)").Matches(x).First().Value));
