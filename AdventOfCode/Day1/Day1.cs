@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace AdventOfCode;
+namespace AdventOfCode.Day1;
 
 public class Day1
 {
