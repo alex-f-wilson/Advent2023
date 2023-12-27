@@ -10,9 +10,15 @@ public static class Day2
         return GetSumOfValidGameNumbers(input);
     }
 
+    private static int GetSumOfValidGameNumbers(string[] games)
+    {
+        return games
+            .Where(s => !IsInvalidGame(s))
+            .Sum(x => int.Parse(new Regex(@"(\d+)(?=:)").Matches(x).First().Value));
+    }
+
     private static bool IsInvalidGame(string gameString)
     {
-        // Matches "3 green" or "6 blue" or "12 red"
         var countsRegex = new Regex(@"(\d+ (blue|red|green))");
 
         return countsRegex.Matches(gameString).Select(r =>
@@ -21,13 +27,6 @@ public static class Day2
                 return new GameSet(int.Parse(values.First()), values.Last());
             })
             .Any(m => !Validator.IsValidGameSet(m));
-    }
-
-    private static int GetSumOfValidGameNumbers(string[] games)
-    {
-        return games
-            .Where(s => !IsInvalidGame(s))
-            .Sum(x => int.Parse(new Regex(@"(\d+)(?=:)").Matches(x).First().Value));
     }
 }
 
