@@ -21,12 +21,12 @@ public static class Day2
     {
         var countsRegex = new Regex(@"(\d+ (blue|red|green))");
 
-        return countsRegex.Matches(gameString).Select(r =>
+        return countsRegex.Matches(gameString).Select(match =>
             {
-                var values = r.Value.Split(' ');
+                var values = match.Value.Split(' ');
                 return new GameSet(int.Parse(values.First()), values.Last());
             })
-            .Any(m => !Validator.IsValidGameSet(m));
+            .Any(gameSet => !Validator.IsValidGameSet(gameSet));
     }
 }
 
