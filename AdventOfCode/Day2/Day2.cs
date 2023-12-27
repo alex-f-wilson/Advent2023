@@ -15,21 +15,18 @@ public static class Day2
         // Matches "3 green" or "6 blue" or "12 red"
         var countsRegex = new Regex(@"(\d+ (blue|red|green))");
 
-        var matches = countsRegex.Matches(gameString).Select(r =>
+        return countsRegex.Matches(gameString).Select(r =>
             {
                 var values = r.Value.Split(' ');
                 return new GameSet(int.Parse(values.First()), values.Last());
             })
-            .ToList();
-
-        var containsInvalidGameSets = matches.Any(m => !Validator.IsValidGameSet(m));
-
-        return containsInvalidGameSets;
+            .Any(m => !Validator.IsValidGameSet(m));
     }
 
     private static int GetSumOfValidGameNumbers(string[] games)
     {
-        return games.Where(s => !IsInvalidGame(s))
+        return games
+            .Where(s => !IsInvalidGame(s))
             .Sum(x => int.Parse(new Regex(@"(\d+)(?=:)").Matches(x).First().Value));
     }
 }
