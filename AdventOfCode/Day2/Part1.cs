@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Day2;
 
-public static class Day2
+public static class Part1
 {
     public static int Execute()
     {
@@ -43,5 +43,3 @@ public static class Validator
         };
     }
 }
-
-public record GameSet(int Count, string Color);
